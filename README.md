@@ -17,5 +17,8 @@ Song.on('error', function(err) {
 });
 ```
 
+# Notice
+Use responsibly and respect SoundCloud and the artists which use it.
+
 # License
 MIT - [http://jbrooksuk.mit-license.org](http://jbrooksuk.mit-license.org)
