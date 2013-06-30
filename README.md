@@ -1,6 +1,8 @@
 # SoundRain
 Evented Node.js module for downloading songs from [SoundCloud](http://soundcloud.com). Based on the awesome work by [@dmotz](https://github.com/dmotz/soundscrape).
 
+This Node.js module isn't connected to the [soundrain.org](http://soundrain.org/) website, it was solely created for my personal use - but figured since I'm awesome, I'll share it.
+
 # Installation
 `npm install soundrain`
 
