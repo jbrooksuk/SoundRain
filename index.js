@@ -55,8 +55,6 @@ SoundRain.prototype.test = function(callback) {
 };
 
 SoundRain.prototype.find = function() {
-	EventEmitter.call(this);
-
 	var self = this, trackData = '';
 
 	http.get(this.url, function(res) {
