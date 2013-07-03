@@ -1,6 +1,6 @@
 {
 	"name": "soundrain",
-	"version": "0.0.2",
+	"version": "0.0.3",
 	"description": "Downloads songs from SoundCloud.com",
 	"main": "./index.js",
 	"repository": "git://github.com/jbrooksuk/SoundRain.git",
