@@ -22,11 +22,9 @@ var SoundRain = function(soundCloudURL, outdir) {
 	this.tracks;
 	this.outfile;
 
-	var self = this;
-
-	self.test(function() {
-		self.find();
-	});
+	this.test(function() {
+		this.find();
+	}.bind(this));
 
 	return this;
 };
@@ -55,17 +53,17 @@ SoundRain.prototype.test = function(callback) {
 };
 
 SoundRain.prototype.find = function() {
-	var self = this, trackData = '';
+	var trackData = '';
 
 	http.get(this.url, function(res) {
 		res.on('data', function(chunk) {
 			trackData += chunk;
-		});
+		}.bind(this));
 		res.on('end', function() {
-			self.tracks = trackData.match(/(window\.SC\.bufferTracks\.push\().+(?=\);)/gi);
-			self.download(self.parse(self.tracks[0]));
-		});
-	});
+			this.tracks = trackData.match(/(window\.SC\.bufferTracks\.push\().+(?=\);)/gi);
+			this.download(this.parse(this.tracks[0]));
+		}.bind(this));
+	}.bind(this));
 
 	return this;
 };
@@ -73,7 +71,7 @@ SoundRain.prototype.find = function() {
 SoundRain.prototype.parse = function(raw) {
 	EventEmitter.call(this);
 	
-	var self = this, rawChaff;
+	var rawChaff;
 	rawChaff = raw.indexOf('{');
 	if(rawChaff === -1) return false;
 	try {
@@ -88,7 +86,6 @@ SoundRain.prototype.parse = function(raw) {
 SoundRain.prototype.download = function(obj) {
 	EventEmitter.call(this);
 
-	var self = this;
 	var trackPattern, trackArtist, trackTitle, trackFile;
 
 	trackPattern = /&\w+;|[^\w|\s]/g;
@@ -99,16 +96,16 @@ SoundRain.prototype.download = function(obj) {
 
 	http.get(obj.streamUrl, function(res) {;
 		return http.get(res.headers.location, function(res) {
-			trackFile = fs.createWriteStream(self.outfile);
+			trackFile = fs.createWriteStream(this.outfile);
 			res.on('data', function(chunk) {
 				return trackFile.write(chunk);
-			});
+			}.bind(this));
 			res.on('end', function() {
 				trackFile.end(); // Close handle
-				self.emit('done', self.outfile);
-			});
-		});
-	});
+				this.emit('done', this.outfile);
+			}.bind(this));
+		}.bind(this));
+	}.bind(this));
 
 	return this;
 };
