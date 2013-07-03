@@ -4,4 +4,5 @@ Song.on('error', function(err) {
     if(err) throw err;
 }).on('done', function(file) {
     console.log(file);
+    process.exit(0);
 });
